@@ -1,6 +1,8 @@
 # Use the current Long Term Support (LTS) version of Node.js
 FROM node:lts
 
+WORKDIR /Matchmaker
+
 # Copy the Matchmaker Server-Code
 COPY /Matchmaker /Matchmaker
 
