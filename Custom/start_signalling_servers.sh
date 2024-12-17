@@ -37,6 +37,7 @@ for (( i=0; i<$NUM_SERVERS; i++ )); do
         -p $SIGNAL_PORT:80 \
         -p $STREAMER_PORT:8888 \
         -p $SFU_PORT:8889 \
+        -p 9999:9999
         $IMAGE_NAME \
         --UseMatchmaker
     
