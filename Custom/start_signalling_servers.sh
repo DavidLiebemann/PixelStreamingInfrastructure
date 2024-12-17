@@ -7,7 +7,6 @@ IMAGE_NAME="pixelstreaming-signallingwebserver5.3"
 BASE_SIGNAL_PORT=81
 BASE_STREAMER_PORT=8888
 BASE_SFU_PORT=9000
-BASE_MATCHMAKER_PORT=9999
 
 # default number of servers, if no argument given
 DEFAULT_NUM_SERVERS=4
@@ -32,14 +31,12 @@ for (( i=0; i<$NUM_SERVERS; i++ )); do
     echo " - Signal-Port: $SIGNAL_PORT"
     echo " - Streamer-Port: $STREAMER_PORT"
     echo " - SFU-Port: $SFU_PORT"
-    echo " - Matchmaker-Port: $BASE_MATCHMAKER_PORT"
 
     docker run -d \
         --name $CONTAINER_NAME \
         -p $SIGNAL_PORT:80 \
         -p $STREAMER_PORT:8888 \
         -p $SFU_PORT:8889 \
-        -p $BASE_MATCHMAKER_PORT:$BASE_MATCHMAKER_PORT \
         $IMAGE_NAME \
         --UseMatchmaker
     
