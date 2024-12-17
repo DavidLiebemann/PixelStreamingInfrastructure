@@ -19,8 +19,8 @@ if exist node\ (
   curl -L -o ./node.zip "https://nodejs.org/dist/%NodeVersion%/%NodeName%.zip"
 
   @Rem Unarchive the .zip
-  tar -xf node.zip
-
+  powershell -Command "Expand-Archive -Path 'node.zip' -DestinationPath '.'"
+  
   @Rem Rename the extracted, versioned, directory that contains the NodeJS binaries to simply "node".
   ren "%NodeName%\" "node"
 
