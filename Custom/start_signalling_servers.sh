@@ -39,10 +39,10 @@ for (( i=0; i<$NUM_SERVERS; i++ )); do
         -p $STREAMER_PORT:8888 \
         -p $SFU_PORT:8889 \
         $IMAGE_NAME \
-        --UseMatchmaker
-        --MatchmakerAddress $SERVER_IP
-        --MatchmakerPort $MATCHMAKER_PORT
-        --PublicIp $SERVER_IP
+        --UseMatchmaker \
+        --MatchmakerAddress $SERVER_IP \
+        --MatchmakerPort $MATCHMAKER_PORT \
+        --PublicIp $SERVER_IP \
     
     echo "Signalling Server $(( i + 1 )) started:"
     echo " - Signalling Server: http://$SERVER_IP:$SIGNAL_PORT"
