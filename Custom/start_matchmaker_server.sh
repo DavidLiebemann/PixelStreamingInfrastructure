@@ -1,6 +1,10 @@
 #!/bin/bash
 
+PORT_MAPPING="9999:9999"
+
 CONTAINER_NAME="matchmaking-server"
+IMAGE_NAME="pixelstreaming-matchmaker5.3"
+
 
 # Check if container is already running
 if [ "$(docker ps -q -f name=$CONTAINER_NAME)" ]; then
