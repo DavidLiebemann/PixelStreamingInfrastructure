@@ -35,13 +35,14 @@ for (( i=0; i<$NUM_SERVERS; i++ )); do
 
     docker run -d \
         --name $CONTAINER_NAME \
-        -p $SIGNAL_PORT:80 \
+        -p $SIGNAL_PORT:$SIGNAL_PORT \
         -p $STREAMER_PORT:8888 \
         -p $SFU_PORT:8889 \
         $IMAGE_NAME \
         --UseMatchmaker \
         --MatchmakerAddress $SERVER_IP \
         --MatchmakerPort $MATCHMAKER_PORT \
+        --HttpPort $SIGNAL_PORT \
         --PublicIp $SERVER_IP \
     
     echo "Signalling Server $(( i + 1 )) started:"
