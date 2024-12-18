@@ -2,8 +2,6 @@
 
 CONTAINER_NAME="matchmaking-server"
 
-docker run -d --name matchmaker mein-image-name --UseMatchmaker
-
 # Check if container is already running
 if [ "$(docker ps -q -f name=$CONTAINER_NAME)" ]; then
     echo "Container $CONTAINER_NAME is already running, stopping it"
