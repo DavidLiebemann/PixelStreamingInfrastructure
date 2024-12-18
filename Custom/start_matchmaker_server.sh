@@ -1,6 +1,9 @@
 #!/bin/bash
 
-PORT_MAPPING="9999:9999"
+
+HTTP_PORT_MAPPING="80:80"
+HTTPS_PORT_MAPPING="443:443"
+MATCHMAKER_PORT_MAPPING="9999:9999"
 
 CONTAINER_NAME="matchmaking-server"
 IMAGE_NAME="pixelstreaming-matchmaker5.3"
@@ -19,5 +22,5 @@ if [ "$(docker ps -aq -f name=$CONTAINER_NAME)" ]; then
 fi
 
 echo "Starting new matchmaker server in background..."
-docker run -d --name $CONTAINER_NAME -p $PORT_MAPPING $IMAGE_NAME
+docker run -d --name $CONTAINER_NAME -p $MATCHMAKER_PORT_MAPPING -p $HTTP_PORT_MAPPING -p $HTTPS_PORT_MAPPING $IMAGE_NAME
 echo "Matchmaker server was started."
