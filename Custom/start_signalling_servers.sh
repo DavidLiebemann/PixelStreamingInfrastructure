@@ -4,6 +4,7 @@
 IMAGE_NAME="pixelstreaming-signallingwebserver5.3"
 
 # Start Ports
+MATCHMAKER_PORT=9999
 BASE_SIGNAL_PORT=81
 BASE_STREAMER_PORT=8888
 BASE_SFU_PORT=9000
@@ -39,6 +40,9 @@ for (( i=0; i<$NUM_SERVERS; i++ )); do
         -p $SFU_PORT:8889 \
         $IMAGE_NAME \
         --UseMatchmaker
+        --MatchmakerAddress $SERVER_IP
+        --MatchmakerPort $MATCHMAKER_PORT
+        --PublicIp $SERVER_IP
     
     echo "Signalling Server $(( i + 1 )) started:"
     echo " - Signalling Server: http://$SERVER_IP:$SIGNAL_PORT"
