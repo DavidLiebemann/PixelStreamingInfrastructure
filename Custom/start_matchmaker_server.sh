@@ -22,5 +22,13 @@ if [ "$(docker ps -aq -f name=$CONTAINER_NAME)" ]; then
 fi
 
 echo "Starting new matchmaker server in background..."
-docker run -d --name $CONTAINER_NAME -p $MATCHMAKER_PORT_MAPPING -p $HTTP_PORT_MAPPING -p $HTTPS_PORT_MAPPING $IMAGE_NAME
+docker run -d \
+ --name $CONTAINER_NAME \
+ -p $MATCHMAKER_PORT_MAPPING \
+ -p $HTTP_PORT_MAPPING \
+ -p $HTTPS_PORT_MAPPING \
+ $IMAGE_NAME \
+ --UseHttps \
+ --HttpPort 80
+
 echo "Matchmaker server was started."
