@@ -35,12 +35,12 @@ NUM_SERVERS=${1:-$DEFAULT_NUM_SERVERS}
 SERVER_IP=$(hostname -I | awk '{print $1}')
 
 # Name of stop and remove script
-STOP_SCRIPT="stop_and_remove_containers_by_image.sh $IMAGE_NAME"
+STOP_SCRIPT="stop_and_remove_containers_by_image.sh"
 
 # Prüfen, ob das andere Skript existiert
 if [ -f "$STOP_SCRIPT" ]; then
     echo "Calling stop and remove script..."
-    bash "$STOP_SCRIPT"
+    bash "$STOP_SCRIPT $IMAGE_NAME"
 else
     echo "Stop script $STOP_SCRIPT not found. Skipping stopping and removing already running signalling servers."
 fi
