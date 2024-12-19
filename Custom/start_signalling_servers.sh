@@ -71,7 +71,7 @@ for (( i=0; i<$NUM_SERVERS; i++ )); do
         --MatchmakerPort $MATCHMAKER_PORT \
         --HttpPort $HTTP_PORT \
         --HttpsPort $HTTPS_PORT \
-        --UseHttps true \
+        --UseHTTPS true \
         --PublicIp $SERVER_IP \
         --peerConnectionOptions "'${PEER_CONNECTION_OPTIONS}'" \
     

@@ -28,6 +28,6 @@ docker run -d \
  -p $HTTP_PORT_MAPPING \
  -p $HTTPS_PORT_MAPPING \
  $IMAGE_NAME \
- --UseHttps true
+ --UseHTTPS true
 
 echo "Matchmaker server was started."
