@@ -1,10 +1,12 @@
 #!/bin/bash
 
 
+SCRIPT_DIRECTORY=$(dirname $0)
+
 # ------------ STUN AND TURN SETUP ------------
 # load TURN- and STUN Config Scripts
-source ../SignallingWebServer/platform_scripts/bash/common_utils.sh
-source ../SignallingWebServer/platform_scripts/bash/turn_user_pwd.sh
+source "$SCRIPT_DIRECTORY/../SignallingWebServer/platform_scripts/bash/common_utils.sh"
+source "$SCRIPT_DIRECTORY/../SignallingWebServer/platform_scripts/bash/turn_user_pwd.sh"
 
 # default values for STUN- and TURN-Server 
 set_start_default_values "y" "y" # activate STUN and TURN
@@ -33,7 +35,7 @@ NUM_SERVERS=${1:-$DEFAULT_NUM_SERVERS}
 SERVER_IP=$(hostname -I | awk '{print $1}')
 
 # Name of stop and remove script
-STOP_SCRIPT="stop_and_remove_containers_by_image.sh"
+STOP_SCRIPT="stop_and_remove_containers_by_image.sh $IMAGE_NAME"
 
 # Prüfen, ob das andere Skript existiert
 if [ -f "$STOP_SCRIPT" ]; then
