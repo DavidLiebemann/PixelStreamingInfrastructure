@@ -66,12 +66,12 @@ for (( i=0; i<$NUM_SERVERS; i++ )); do
         -p $STREAMER_PORT:8888 \
         -p $SFU_PORT:8889 \
         $IMAGE_NAME \
-        --UseMatchmaker \
+        --UseMatchmaker true \
         --MatchmakerAddress $SERVER_IP \
         --MatchmakerPort $MATCHMAKER_PORT \
         --HttpPort $HTTP_PORT \
         --HttpsPort $HTTPS_PORT \
-        --UseHttps \
+        --UseHttps true \
         --PublicIp $SERVER_IP \
         --peerConnectionOptions "'${PEER_CONNECTION_OPTIONS}'" \
     
