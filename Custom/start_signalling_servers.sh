@@ -1,5 +1,18 @@
 #!/bin/bash
 
+
+# ------------ STUN AND TURN SETUP ------------
+# load TURN- and STUN Config Scripts
+source ../SignallingWebServer/platform_scripts/bash/common_utils.sh
+source ../SignallingWebServer/platform_scripts/bash/turn_user_pwd.sh
+
+# default values for STUN- and TURN-Server 
+set_start_default_values "y" "y" # activate STUN and TURN
+
+PEER_CONNECTION_OPTIONS="{\""iceServers\"":[{\""urls\"":[\""stun:${stunserver}\"",\""turn:${turnserver}\""],\""username\"":\""${turnusername}\"",\""credential\"":\""${turnpassword}\""}]}"
+
+# ------------ STUN AND TURN END ------------
+
 # docker image name
 IMAGE_NAME="pixelstreaming-signallingwebserver5.3"
 
@@ -15,7 +28,6 @@ DEFAULT_NUM_SERVERS=4
 
 # number of servers
 NUM_SERVERS=${1:-$DEFAULT_NUM_SERVERS}
-
 
 # Determine Server-IP
 SERVER_IP=$(hostname -I | awk '{print $1}')
@@ -38,8 +50,8 @@ echo "Starting $NUM_SERVERS Signalling Servers..."
 for (( i=0; i<$NUM_SERVERS; i++ )); do
     HTTP_PORT=$(( BASE_HTTP_PORT + i ))      # Http-Port: 81, 82, 83, ...
     HTTPS_PORT=$(( BASE_HTTPS_PORT + i ))      # Https-Port: 8443, 8444, 8445, ...
-    STREAMER_PORT=$(( BASE_STREAMER_PORT + i ))  # Streamer-Port: 8888, 8889, ...
-    SFU_PORT=$(( BASE_SFU_PORT + i ))            # SFU-Port: 9000, 9001, ...
+    STREAMER_PORT=$(( BASE_STREAMER_PORT + i * 2 ))  # Host-Streamer-Port: 8888, 8890, 8892, ...
+    SFU_PORT=$(( STREAMER_PORT + 1 ))         # Host-SFU-Port: 8889, 8891, 8893, ...
     CONTAINER_NAME="signalling_server_$(( i + 1 ))"
 
     echo "Starting Signalling Server $(( i + 1 ))..."
@@ -61,6 +73,7 @@ for (( i=0; i<$NUM_SERVERS; i++ )); do
         --HttpsPort $HTTPS_PORT \
         --UseHttps \
         --PublicIp $SERVER_IP \
+        --peerConnectionOptions "'${PEER_CONNECTION_OPTIONS}'" \
     
     echo "Signalling Server $(( i + 1 )) started:"
     echo " - Signalling Server: https://$SERVER_IP:$HTTPS_PORT"
